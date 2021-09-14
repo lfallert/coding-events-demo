@@ -21,6 +21,7 @@ import java.util.Map;
 public class EventController {
 
     private static List<Event> events = new ArrayList<>();
+    private static Map<String, String> eventsHash = new HashMap<>();
 
 //    @GetMapping
 //    public String displayAllEvents(Model model) {
