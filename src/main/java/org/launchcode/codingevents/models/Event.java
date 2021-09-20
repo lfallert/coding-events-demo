@@ -1,8 +1,6 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 /**
@@ -24,11 +22,28 @@ public class Event {
     @Email(message = "Invalid email. Try again.")
     private String contactEmail;
 
-    public Event(String name, String description, String contactEmail) {
+    @Size(max = 85, message = "Location cannot exceed 85 characters")
+    @NotBlank(message = "Location is required")
+    private String location;
+
+    @AssertTrue
+    private boolean requiresRegister;
+
+    @Positive(message="Number of attendees must be one or more.")
+    private int numberOfAttendees;
+
+    private EventType type;
+
+    public Event(String name, String description, String contactEmail, String location, EventType type, boolean requiresRegister,
+                 int numberOfAttendees) {
         this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
+        this.location = location;
+        this.type=type;
+        this.requiresRegister = requiresRegister;
+        this.numberOfAttendees = numberOfAttendees;
     }
 
     public Event() {
@@ -58,6 +73,38 @@ public class Event {
 
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public boolean isRequiresRegister() {
+        return requiresRegister;
+    }
+
+    public void setRequiresRegister(boolean requiresRegister) {
+        this.requiresRegister = requiresRegister;
+    }
+
+    public int getNumberOfAttendees() {
+        return numberOfAttendees;
+    }
+
+    public void setNumberOfAttendees(int numberOfAttendees) {
+        this.numberOfAttendees = numberOfAttendees;
     }
 
     public int getId() {
